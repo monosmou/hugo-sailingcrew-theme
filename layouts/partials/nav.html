@@ -14,28 +14,22 @@
             {{ end }}
         </div>
         {{ "<!-- Collect the nav links, forms, and other content for toggling -->" | safeHTML }}
+
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                {{ if and .Site.Params.about .Site.Params.navigation.links.about }}
+
+                {{ if and .Site.Params.crew.headline .Site.Params.navigation.links.crew }}
                     <li>
-                        <a class="page-scroll" href="#about">{{ .Site.Params.navigation.links.about }}</a>
+                        <a class="page-scroll" href="#crew">{{ .Site.Params.navigation.links.crew }}</a>
                     </li>
                 {{ end }}
-                {{ if and .Site.Params.services.list .Site.Params.navigation.links.services }}
+
+                {{ if and .Site.Data.trip .Site.Params.navigation.links.trips }}
                     <li>
-                        <a class="page-scroll" href="#services">{{ .Site.Params.navigation.links.services }}</a>
+                        <a class="page-scroll" href="#trips">{{ .Site.Params.navigation.links.trips }}</a>
                     </li>
                 {{ end }}
-                {{ if and .Site.Data.projects .Site.Params.navigation.links.portfolio }}
-                    <li>
-                        <a class="page-scroll" href="#portfolio">{{ .Site.Params.navigation.links.portfolio }}</a>
-                    </li>
-                {{ end }}
-                {{ if and .Site.Params.location .Site.Params.navigation.links.location }}
-                <li>
-                    <a class="page-scroll" href="#location">{{ .Site.Params.navigation.links.location }}</a>
-                </li>
-                {{ end }}
+
                 {{ if and .Site.Params.contact .Site.Params.navigation.links.contact }}
                     <li>
                         <a class="page-scroll" href="#contact">{{ .Site.Params.navigation.links.contact }}</a>

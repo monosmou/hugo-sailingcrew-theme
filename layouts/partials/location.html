@@ -1,9 +1,10 @@
 
-{{ if and .Site.Params.location.latitude .Site.Params.location.longitude }}
-<section id="location" class="no-padding">
+{{ if .Site.Data.trip }}
+<section id="location" class="no-padding" data->
     <div class="hidden">
-        <input id="gmap-lat" value="{{ .Site.Params.location.latitude }}" />
-        <input id="gmap-lng" value="{{ .Site.Params.location.longitude }}" />
+        {{ range .Site.Data.trip }}
+        <a class="kml-track" href="{{ .kml }}">{{ .title }}</a>
+        {{ end }}
     </div>
     <a href="https://www.google.com/maps?z=16&q={{ .Site.Params.location.latitude }},{{ .Site.Params.location.longitude }}&ll={{ .Site.Params.location.latitude }},{{ .Site.Params.location.longitude }}">
         <div id="map">
