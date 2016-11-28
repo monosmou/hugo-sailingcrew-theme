@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+<head>
+    {{ partial "head.html" . }}
+</head>
+<body id="page-top"{{ with .Site.Params.hero.bodyClass }} class="{{ . }}"{{ end}}>
+
+{{ $baseurl := .Site.BaseURL }}
+<h1>{{ .Title }}</h1>
+
+{{ partial "photoswipe.html" }}
+
+<div class="gallery" itemscope="" itemtype="http://schema.org/ImageGallery" data-pswp-uid="1">
+    {{ range .Params.images }}
+
+    <figure itemscope="" itemtype="http://schema.org/ImageObject">
+        <a href="{{ $baseurl }}{{ . }}" itemprop="contentUrl" data-size="650x350">
+            <img src="{{ $baseurl }}{{ . }}" itemprop="thumbnail" alt="alt-text">
+        </a>
+        <figcaption itemprop="caption description">
+            bild unterschrift
+            <span itemprop="copyrightHolder">author here</span>
+        </figcaption>
+    </figure>
+    {{ end }}
+</div>
+
+{{ partial "js.html" . }}
+</body>
+</html>

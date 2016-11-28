@@ -1,6 +1,11 @@
 {{ "<!-- Portfolio Modals -->" | safeHTML }}
+
+{{ partial "photoswipe.html" }}
+
+{{ $baseurl := .Site.BaseURL }}
+
 {{ range .Site.Data.trip }}
-<div class="portfolio-modal modal fade" id="portfolioModal{{ .modalID }}" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="trip-modal modal fade" id="portfolioModal{{ .modalID }}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
             <div class="lr">
@@ -12,13 +17,29 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="modal-body">
-                        {{ with .title }}
-                            <h2>{{ . }}</h2>
+                        {{ if .title }}
+                            <h2>{{ .title }} {{ if .date }} ({{ .date }}) {{ end }}</h2>
                         {{ end }}
                         {{ if and .title .description }}
                             <hr class="star-primary">
                         {{ end }}
-                        <img src="{{ .img }}" class="img-responsive img-centered" alt="">
+
+                        <div class="gallery" itemscope="" itemtype="http://schema.org/ImageGallery" data-pswp-uid="1">
+                            {{ range .images }}
+
+                            <figure itemscope="" itemtype="http://schema.org/ImageObject">
+                                <a href="{{ $baseurl }}{{ . }}" itemprop="contentUrl" data-size="650x350">
+                                    <img src="{{ $baseurl }}{{ . }}" itemprop="thumbnail" alt="alt-text">
+                                </a>
+                                <figcaption itemprop="caption description">
+                                    bild unterschrift
+                                    <span itemprop="copyrightHolder">author here</span>
+                                </figcaption>
+                            </figure>
+                            {{ end }}
+                        </div>
+
+
                         {{ with .description }}
                             <p>{{ . | markdownify }}</p>
                         {{ end }}
@@ -32,11 +53,6 @@
                                 {{ if .date }}
                                     <li>{{ with $.Site.Params.trip.modal.date }}{{.}}: {{ end }}
                                         <strong><a href="#">{{ .date }}</a></strong>
-                                    </li>
-                                {{ end }}
-                                {{ if .category }}
-                                    <li>{{ with $.Site.Params.trip.modal.category }}{{.}}: {{ end }}
-                                        <strong><a href="#">{{ .category }}</a></strong>
                                     </li>
                                 {{ end }}
                             </ul>

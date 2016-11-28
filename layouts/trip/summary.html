@@ -1,0 +1,21 @@
+<div class="col-lg-4 col-sm-6">
+    <a href="#portfolioModal{{ .Params.modalid }}" class="portfolio-box portfolio-link" data-toggle="modal">
+        <img src="{{ .Params.img }}" class="img-responsive" alt="">
+        {{ if and .Params.category .Title }}
+        <div class="portfolio-box-caption">
+            <div class="portfolio-box-caption-content">
+                {{ with .Params.category }}
+                <div class="project-category text-faded">
+                    {{ . }}
+                </div>
+                {{ end }}
+                {{ with .Title }}
+                <div class="project-name">
+                    {{ . }}
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+    </a>
+</div>
