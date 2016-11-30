@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+<head>
+    {{ partial "head.html" . }}
+</head>
+<body id="page-top"{{ with .Site.Params.hero.bodyClass }} class="{{ . }}"{{ end}}>
+
+{{ block "nav" . }}{{ end }}
+
+{{ block "main" . }}{{ end }}
+
+<section class="no-padding" id="trips">
+    <div class="container-fluid">
+        <div class="row no-gutter">
+
+
+            {{ block "trips" . }}{{ end }}
+
+        </div>
+    </div>
+</section>
+
+{{ block "modals" . }}{{ end }}
+
+{{ block "location" . }}{{ end }}
+
+{{ partial "js.html" . }}
+</body>
+</html>

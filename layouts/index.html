@@ -1,46 +1,44 @@
-<!DOCTYPE html>
-<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
-<head>
-    {{ partial "head.html" . }}
-</head>
-<body id="page-top"{{ with .Site.Params.hero.bodyClass }} class="{{ . }}"{{ end}}>
-{{ if or .Site.Params.navigation.links.crew .Site.Params.navigation.links.trips }}
-{{ partial "nav.html" . }}
+
+{{ define "nav" }}
+    {{ if .Site.Params.navigation.links }} {{ partial "nav.html" . }} {{ end }}
 {{ end }}
 
-{{ if .Site.Params.hero }}
-{{ partial "hero.html" . }}
+{{ define "main" }}
+
+    {{ if .Site.Params.hero }}
+    {{ partial "hero.html" . }}
+    {{ end }}
+
+    {{ if .Site.Data.contact_info }}
+    {{ partial "contact_info.html" . }}
+    {{ end }}
+
+    {{ if .Site.Params.services.list }}
+    {{ partial "services.html" . }}
+    {{ end }}
+
+    {{ if .Site.Params.aside }}
+    {{ partial "aside.html" . }}
+    {{ end }}
+
+    {{ if .Site.Params.contact }}
+    {{ partial "contact.html" . }}
+    {{ end }}
 {{ end }}
 
-{{ if .Site.Data.contact_info }}
-{{ partial "contact_info.html" . }}
+{{ define "trips" }}
+    {{ range first 10 .Data.Pages }}
+    {{ .Render "summary" }}
+    {{ end }}
 {{ end }}
 
-{{ if .Site.Params.services.list }}
-{{ partial "services.html" . }}
+{{ define "modals" }}
+    {{ partial "photoswipe.html" . }}
+    {{ range .Data.Pages }}
+    {{ .Render "modal" }}
+    {{ end }}
 {{ end }}
 
-{{ if .Site.Data.trip }}
-{{ partial "trips.html" . }}
-{{ end }}
-
-{{ if .Site.Params.location }}
-{{ partial "location.html" . }}
-{{ end }}
-
-{{ if .Site.Params.aside }}
-{{ partial "aside.html" . }}
-{{ end }}
-
-{{ if .Site.Params.contact }}
-{{ partial "contact.html" . }}
-{{ end }}
-
-{{ if .Site.Data.trip }}
-{{ partial "modals.html" . }}
-{{ end }}
-
-
-{{ partial "js.html" . }}
-</body>
-</html>
+{{ define "location" }}
+    {{ partial "location.html" . }}
+{{ end}}

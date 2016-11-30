@@ -1,0 +1,16 @@
+{{ $title := $.Scratch.Get "title" }}
+{{ $date := $.Scratch.Get "date" }}
+{{ $format := $.Scratch.Get "format" }}
+<h2>
+
+    {{ if $date }}
+    <span class="date">{{ dateFormat $format $date }} </span>
+    &mdash;
+
+    {{ end }}
+    {{ $title }}
+</h2>
+
+title = <b>{{ $title }}</b><br/>
+date  = <b>{{ $date }}</b><br/>
+format = <b>{{ $format }}</b><br/>
