@@ -312,19 +312,24 @@ header .header-content .header-content-inner p {
     height: 100%;
     text-align: center;
     color: #fff;
-    opacity: 0;
-    background: rgba(240,95,64,.9);
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
+    background: -webkit-linear-gradient(rgba(255,255,255,0), rgba(240,95,64,.5)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(255,255,255,0), rgba(240,95,64,.5)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(255,255,255,0), rgba(240,95,64,.5)); /* For Firefox 3.6 to 15 */
+    background:linear-gradient(rgba(255,255,255,0), rgba(240,95,64,.5));
 }
 
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content {
     position: absolute;
-    top: 50%;
+    top: 80%;
     width: 100%;
     text-align: center;
     transform: translateY(-50%);
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
 }
 
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category,
@@ -343,8 +348,8 @@ header .header-content .header-content-inner p {
     font-size: 18px;
 }
 
-.portfolio-box:hover .portfolio-box-caption {
-    opacity: 1;
+.portfolio-box:hover .portfolio-box-caption .portfolio-box-caption-content {
+    top: 65%;
 }
 
 @media(min-width:768px) {
