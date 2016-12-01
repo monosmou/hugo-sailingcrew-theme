@@ -1,6 +1,6 @@
 <div class="col-lg-4 col-sm-6">
     <a href="#portfolioModal{{ .Params.modalid }}" class="portfolio-box portfolio-link" data-toggle="modal">
-        <img src="{{ .Params.img.path }}" class="img-responsive"{{ with .Params.img.alt }} alt="{{ . }}" {{ end }}>
+        <img src="{{ .Params.img.path }}" class="img-responsive" alt="">
 
         {{ if and .Params.category .Title }}
         <div class="portfolio-box-caption">
