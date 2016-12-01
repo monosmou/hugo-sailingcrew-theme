@@ -9,9 +9,7 @@
     {{ partial "hero.html" . }}
     {{ end }}
 
-    {{ if .Site.Data.contact_info }}
     {{ partial "contact_info.html" . }}
-    {{ end }}
 
     {{ if .Site.Params.services.list }}
     {{ partial "services.html" . }}
