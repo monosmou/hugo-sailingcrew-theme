@@ -1,9 +1,9 @@
 
-{{ if .Data.Pages }}
-<section id="location" class="no-padding" data->
+{{ if .Site.Pages }}
+<section id="location" class="no-padding" data>
     <div class="hidden">
-        {{ range where .Site.Pages "Params.category" "trip" }}
-        <a class="kml-track" href="{{ .Params.kml.path }}">{{ .Params.title }}</a>
+        {{ range where .Site.Pages "Params.category" "Trip" }}
+            <a class="kml-track" href="{{ .Params.kml.path }}">{{ .Params.title }} - {{ .Params.category }}</a>
         {{ end }}
     </div>
     <a href="https://www.google.com/maps?z=16&q={{ .Site.Params.location.latitude }},{{ .Site.Params.location.longitude }}&ll={{ .Site.Params.location.latitude }},{{ .Site.Params.location.longitude }}">
