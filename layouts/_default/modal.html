@@ -23,12 +23,12 @@
                             {{ range .Params.images }}
 
                             <figure itemscope="" itemtype="http://schema.org/ImageObject">
-                                <a href="{{ $baseurl }}{{ . }}" itemprop="contentUrl" data-size="650x350">
-                                    <img src="{{ $baseurl }}{{ . }}" itemprop="thumbnail" alt="alt-text">
+                                <a href="{{ $baseurl }}{{ .path }}" itemprop="contentUrl" data-size="650x350">
+                                    <img src="{{ $baseurl }}{{ .path }}" itemprop="thumbnail" alt="alt-text">
                                 </a>
                                 <figcaption itemprop="caption description">
-                                    bild unterschrift
-                                    <span itemprop="copyrightHolder">author here</span>
+                                    {{ with .alt }} {{ . }} {{ end }}
+                                    {{ with .owner }}<span itemprop="copyrightHolder">{{ . }}</span>{{ end }}
                                 </figcaption>
                             </figure>
                             {{ end }}
