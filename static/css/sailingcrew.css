@@ -552,3 +552,31 @@ span[itemprop="copyrightHolder"] {
 span[itemprop="copyrightHolder"]:before {
     content: "Foto: ";
 }
+
+body.with-locations {
+    position: relative;
+}
+
+body.with-locations .location-container {
+    display: block;
+    position: fixed !important;
+    width: 100%;
+    bottom: 0;
+    z-index: 1050;
+    border-top: 2px solid #222;
+}
+
+body.with-locations #timemapslider {
+    display: block;
+    width: 100%;
+    height: 2.5em;
+    background: black;
+}
+
+.location-container {
+    display: none;
+}
+
+body.with-locations .location-container {
+    display: block;
+}

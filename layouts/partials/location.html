@@ -1,15 +1,19 @@
 
 {{ if .Site.Pages }}
-<section id="location" class="no-padding" data>
-    <div class="hidden">
-        {{ range where .Site.Pages "Params.category" "Trip" }}
-            <a class="kml-track" href="{{ .Params.kml.path }}">{{ .Params.title }} - {{ .Params.category }}</a>
-        {{ end }}
-    </div>
-    <a href="https://www.google.com/maps?z=16&q={{ .Site.Params.location.latitude }},{{ .Site.Params.location.longitude }}&ll={{ .Site.Params.location.latitude }},{{ .Site.Params.location.longitude }}">
-        <div id="map">
-            &nbsp;
+
+<section class="location-container no-padding">
+    <div id="timemapslider"></div>
+    <div id="location">
+        <div class="hidden">
+            {{ range where .Site.Pages "Params.category" "Trip" }}
+                <a class="kml-track" href="https://minos-2016-w3.monosmou.com{{ .Params.kml.path }}">{{ .Params.title }} - {{ .Params.category }}</a>
+            {{ end }}
         </div>
-    </a>
+        <a href="https://www.google.com/maps?z=16&q={{ .Site.Params.location.latitude }},{{ .Site.Params.location.longitude }}&ll={{ .Site.Params.location.latitude }},{{ .Site.Params.location.longitude }}">
+            <div id="map">
+                &nbsp;
+            </div>
+        </a>
+    </div>
 </section>
 {{ end }}
