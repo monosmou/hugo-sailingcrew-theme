@@ -40,9 +40,11 @@ body.with-storymap .storymap {
     line-height: 1.5em;
     font-size: 1.5em;
     padding: 0 0.75em;
+    color: #FFF;
+    opacity: 0.75;
 }
 .storymap-timebar i.storymap-icon:hover {
-    color: white;
+    opacity: 1;
 }
 .storymap-timebar i.storymap-icon-draghandle {
     left: 0;

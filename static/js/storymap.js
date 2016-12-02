@@ -1,4 +1,5 @@
 (function ( $ ) {
+    var activePhotoswipe = false;
 
     // parse slide data (url, title, size ...) from DOM elements
     // (children of gallerySelector)
@@ -104,7 +105,6 @@
 
         if(index >= 0) {
             // open PhotoSwipe if valid index found
-            console.log(index, clickedGallery);
             openPhotoSwipe( index, clickedGallery );
         }
         return false;
@@ -142,42 +142,6 @@
         return params;
     };
 
-    var openPhotoSwipe = function(index, galleryElement, disableAnimation) {
-        var pswpElement = document.getElementById('photoswipe'),
-            gallery,
-            options,
-            items;
-
-        items = parseThumbnailElements(galleryElement);
-
-        // define options (if needed)
-        options = {
-            index: index,
-
-            // define gallery index (for URL)
-            galleryUID: galleryElement.getAttribute('data-pswp-uid'),
-
-            getThumbBoundsFn: function(index) {
-                // See Options -> getThumbBoundsFn section of documentation for more info
-                var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
-                    pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-                    rect = thumbnail.getBoundingClientRect();
-
-                return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
-            }
-
-        };
-
-        if(disableAnimation) {
-            options.showAnimationDuration = 0;
-        }
-
-        // Pass data to PhotoSwipe and initialize it
-        gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
-        gallery.init();
-    };
-
-
     var styles = [
         {
             'featureType': 'landscape', 'stylers': [{'saturation': -100}, {'lightness': 65}, {'visibility': 'on'}]
@@ -209,10 +173,10 @@
                 rotateControl: true,
                 zoom: 6,
                 center: {lat: (36.60+36.45)/2, lng: (27.775+28.227)/2},
-                zoomControl: false,
+                zoomControl: true,
                 zoomControlOpt: {
                     style: 'SMALL',
-                    position: 'TOP_LEFT'
+                    position: 'TOP_CENTER'
                 },
                 rotateControlOptions: {
                     heading: 120
@@ -288,6 +252,10 @@
             'top': menu.offsetHeight+'px'
         });
 
+        if (activePhotoswipe) {
+            activePhotoswipe.updateSize();
+        }
+
         google.maps.event.trigger(map, "resize");
 
         adjustResizeIcon( k/max  );
@@ -301,7 +269,7 @@
     resize.addEventListener('click', toggleMapSize, false);
 
 
-    var makeDraggable = function(el) {
+    var makeTimebarDraggable = function(el) {
         window.onload = addListeners;
 
         function pauseEvent(e) {
@@ -350,7 +318,87 @@
         }
     };
 
-    makeDraggable(timebar);
+    var coordinates = false;
+    var lastCurrentIndex = false;
+    var marker = marker = new google.maps.Marker({map: googleMap, visible: false});
+    var updateMapFromLoadedImage = function(index, item) {
+        // index - index of a slide that was loaded
+        // item - slide object
+
+        // initialize coordinates cache if needed
+        if (typeof(coordinates) == 'undefined') {
+            coordinates = [];
+        }
+
+        // check if the marker and center of the map need to be moved
+        var currentIndex = activePhotoswipe.getCurrentIndex();
+        if (currentIndex == lastCurrentIndex || !coordinates[currentIndex]) {
+            marker.setVisible(false);
+            return;
+        }
+
+        // move the marker to the current position and slide label
+        marker.setPosition(coordinates[currentIndex]);
+        marker.setLabel(''+(currentIndex+1));
+        marker.setVisible(true);
+        marker.setMap(googleMap);
+
+        // update the position of the marker for the new image that is displayed
+        googleMap.setCenter(coordinates[currentIndex]);
+        googleMap.setZoom(12);
+        lastCurrentIndex = currentIndex;
+    };
+
+    var openPhotoSwipe = function(index, galleryElement, disableAnimation) {
+        var pswpElement = document.getElementById('photoswipe'),
+            options,
+            items;
+
+        items = parseThumbnailElements(galleryElement);
+
+        // get the coordinates for all items
+        coordinates = [];
+        for (var i=0;i<items.length;i++) {
+            // cache the coordinates for the index that just got loaded
+            var lat = parseFloat(items[i].el.getAttribute('data-lat'));
+            var lng = parseFloat(items[i].el.getAttribute('data-lng'));
+            if (!isNaN(lat) && !isNaN(lng)) {
+                coordinates[i] = {'lat': lat, 'lng':lng};
+            } else {
+                coordinates[i]=false;
+            }
+        }
+
+        // define options (if needed)
+        options = {
+            index: index,
+
+            // define gallery index (for URL)
+            galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+
+            getThumbBoundsFn: function(index) {
+                // See Options -> getThumbBoundsFn section of documentation for more info
+                var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+                    pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                    rect = thumbnail.getBoundingClientRect();
+
+                return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+            }
+
+        };
+
+        if(disableAnimation) {
+            options.showAnimationDuration = 0;
+        }
+
+        // Pass data to PhotoSwipe and initialize it
+        activePhotoswipe = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+        activePhotoswipe.listen('afterChange', updateMapFromLoadedImage);
+        activePhotoswipe.init();
+    };
+
+
+    makeTimebarDraggable(timebar);
 
     // set initial small size
     adjustMapSize(200);
@@ -374,5 +422,4 @@
     };
 
     initPhotoswipeFromDom('.gallery');
-
 }( jQuery ));

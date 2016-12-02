@@ -24,7 +24,7 @@
     <div style="display: none;">
         {{ range .Params.images }}
 
-        <figure itemscope itemtype="http://schema.org/ImageObject">
+        <figure itemscope itemtype="http://schema.org/ImageObject" {{ with .position}} data-lat="{{ .lat }}" data-lng="{{ .lng }}" {{end}}>
             <a href="{{ $.Site.BaseURL }}{{ .path }}" itemprop="contentUrl" data-size="650x350">
                 <img src="{{ $.Site.BaseURL }}{{ .path }}" itemprop="thumbnail" alt="alt-text">
             </a>
