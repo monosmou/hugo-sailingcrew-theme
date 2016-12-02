@@ -304,7 +304,7 @@ header .header-content .header-content-inner p {
     max-width: 650px;
 }
 
-.portfolio-box .portfolio-box-caption {
+.portfolio-box-caption {
     display: block;
     position: absolute;
     bottom: 0;
@@ -321,7 +321,7 @@ header .header-content .header-content-inner p {
     background:linear-gradient(rgba(255,255,255,0), rgba(240,95,64,.5));
 }
 
-.portfolio-box .portfolio-box-caption .portfolio-box-caption-content {
+.portfolio-box-caption-content {
     position: absolute;
     top: 80%;
     width: 100%;
@@ -332,32 +332,32 @@ header .header-content .header-content-inner p {
     transition: all .35s;
 }
 
-.portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category,
-.portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
+.project-category,
+.project-name {
     padding: 0 15px;
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
 }
 
-.portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category {
+.project-category {
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 600;
 }
 
-.portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
+.project-name {
     font-size: 18px;
 }
 
-.portfolio-box:hover .portfolio-box-caption .portfolio-box-caption-content {
+.portfolio-box:hover .portfolio-box-caption-content {
     top: 65%;
 }
 
 @media(min-width:768px) {
-    .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category {
+    .project-category {
         font-size: 16px;
     }
 
-    .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
+    .project-name {
         font-size: 22px;
     }
 }
@@ -516,33 +516,10 @@ img::-moz-selection {
 }
 
 body {
-    webkit-tap-highlight-color: #222;
+    -webkit-tap-highlight-color: #222;
 }
 
-#map {
-    height: 300px;
-    overflow: visible;
-    position: relative;
-}
-
-.gallery {
-    float: right;
-}
-.gallery img {
-    width: 100%;
-    height: auto;
-}
-
-.gallery figure {
-    display: block;
-    float: left;
-    margin: 0 5px 5px 0;
-    width: 80px;
-}
-
-.gallery figcaption {
-    display: none;
-}
+/** photoswipe **/
 
 span[itemprop="copyrightHolder"] {
     color: #888;
@@ -551,32 +528,4 @@ span[itemprop="copyrightHolder"] {
 
 span[itemprop="copyrightHolder"]:before {
     content: "Foto: ";
-}
-
-body.with-locations {
-    position: relative;
-}
-
-body.with-locations .location-container {
-    display: block;
-    position: fixed !important;
-    width: 100%;
-    bottom: 0;
-    z-index: 1050;
-    border-top: 2px solid #222;
-}
-
-body.with-locations #timemapslider {
-    display: block;
-    width: 100%;
-    height: 2.5em;
-    background: black;
-}
-
-.location-container {
-    display: none;
-}
-
-body.with-locations .location-container {
-    display: block;
 }

@@ -1,16 +1,12 @@
-<div class="col-lg-4 col-sm-6">
-    <a href="#portfolioModal{{ .Params.modalid }}" class="portfolio-box portfolio-link" data-toggle="modal">
-        <img src="{{ .Params.img.path }}" class="img-responsive" alt="">
-
+<div class="col-lg-4 col-sm-6 gallery" itemscope="" itemtype="http://schema.org/ImageGallery"
+     data-pswp-uid="{{ .Params.modalid }}">
+    <figure itemscope="" itemtype="http://schema.org/ImageObject" class="portfolio-box portfolio-link">
+        <a href="{{ $.Site.BaseURL }}{{ .Params.img.path }}" itemprop="contentUrl" data-size="650x350">
+            <img src="{{ .Params.img.path }}" class="img-responsive" alt="">
+        </a>
         {{ if and .Params.category .Title }}
-        <div class="portfolio-box-caption">
+        <figcaption itemprop="caption description" class="portfolio-box-caption">
             <div class="portfolio-box-caption-content">
-                {{ with .Params.category }}
-                <div class="project-category text-faded">
-                    {{ . }}
-                </div>
-                {{ end }}
-
                 {{ if .Title }}
                 <div class="project-name">
                     {{ with .Date }} <span class="date">{{ dateFormat "Monday" . }}:</span>{{ end }}
@@ -21,7 +17,27 @@
                     {{ len .Params.images }} images
                 </div>
             </div>
-        </div>
+        </figcaption>
         {{ end }}
-    </a>
+    </figure>
+
+    <!-- old modal content -->
+    <div class="gallery-parts" style="display: none;">
+        {{ range .Params.images }}
+
+        <figure itemscope="" itemtype="http://schema.org/ImageObject">
+            <a href="{{ $.Site.BaseURL }}{{ .path }}" itemprop="contentUrl" data-size="650x350">
+                <img src="{{ $.Site.BaseURL }}{{ .path }}" itemprop="thumbnail" alt="alt-text">
+            </a>
+            <figcaption itemprop="caption description">
+                {{ with .alt }} {{ . }} {{ end }}
+                {{ with .owner }}<span itemprop="copyrightHolder">{{ . }}</span>{{ end }}
+            </figcaption>
+        </figure>
+        {{ end }}
+    </div>
+
+    {{ with .Description }}
+    <p>{{ . | markdownify }}</p>
+    {{ end }}
 </div>

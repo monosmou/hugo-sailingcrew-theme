@@ -30,13 +30,6 @@
     {{ end }}
 {{ end }}
 
-{{ define "modals" }}
-    {{ partial "photoswipe.html" . }}
-    {{ range .Data.Pages }}
-    {{ .Render "modal" }}
-    {{ end }}
-{{ end }}
-
-{{ define "location" }}
-    {{ partial "location.html" . }}
+{{ define "storymap" }}
+    {{ partial "storymap.html" . }}
 {{ end}}

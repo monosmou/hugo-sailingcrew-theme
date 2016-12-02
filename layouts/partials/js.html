@@ -6,15 +6,15 @@
 <script src="{{ .Site.BaseURL }}js/jquery.easing.min.js"></script>
 <script src="{{ .Site.BaseURL }}js/jquery.fittext.js"></script>
 <script src="{{ .Site.BaseURL }}js/wow.min.js"></script>
-{{ "<!-- Swiper -->" | safeHTML }}
+
+{{ "<!-- Photoswipe -->" | safeHTML }}
 <script src="{{ .Site.BaseURL }}js/photoswipe.min.js"></script>
 <script src="{{ .Site.BaseURL }}js/photoswipe-ui-default.min.js"></script>
 
 {{ if .Site.Params.location }}
 <script src='https://maps.googleapis.com/maps/api/js?key={{ .Site.Params.location.maps_api_key }}&v=3.exp'></script>
-<script src="{{ .Site.BaseURL }}js/trips.js"></script>
+<script src="{{ .Site.BaseURL }}js/storymap.js"></script>
 {{ end }}
-{{ "<!-- Custom Theme JavaScript -->" | safeHTML }}
 
-<script src="{{ .Site.BaseURL }}js/initphotoswipe.js"></script>
+{{ "<!-- Custom Theme JavaScript -->" | safeHTML }}
 <script src="{{ .Site.BaseURL }}js/sailingcrew.js"></script>

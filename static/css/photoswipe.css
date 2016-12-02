@@ -10,6 +10,7 @@
   height: 100%;
   left: 0;
   top: 0;
+
   overflow: hidden;
   -ms-touch-action: none;
   touch-action: none;

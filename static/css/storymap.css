@@ -1,0 +1,62 @@
+
+.storymap,
+.storymap > a.kml-track {
+    display: none;
+}
+
+body.with-storymap {
+    position: relative;
+}
+
+body.with-storymap .storymap {
+    display: block;
+}
+
+.storymap > .storymap-container {
+    position: fixed !important;
+    width: 100%;
+    bottom: 0;
+    z-index: 1500;
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+}
+
+.storymap-timebar {
+    display: block;
+    width: 100%;
+    background: black;
+    cursor: move;
+    position: relative;
+}
+
+/* size of the timebar */
+.storymap-timebar,
+.storymap {
+    padding-top: 2.5em;
+}
+.storymap-timebar i.storymap-icon {
+    position: absolute;
+    top: 0.1em;
+    line-height: 1.5em;
+    font-size: 1.5em;
+    padding: 0 0.75em;
+}
+.storymap-timebar i.storymap-icon:hover {
+    color: white;
+}
+.storymap-timebar i.storymap-icon-draghandle {
+    left: 0;
+}
+
+.storymap-timebar i.storymap-icon-resize {
+    right: 0;
+}
+
+.photoswipe-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    opacity: 1;
+}
