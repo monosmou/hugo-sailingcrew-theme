@@ -297,7 +297,7 @@ header .header-content .header-content-inner p {
     margin-bottom: 0;
 }
 
-.portfolio-box {
+.trip-summary {
     display: block;
     position: relative;
     margin: 0 auto;
@@ -348,7 +348,7 @@ header .header-content .header-content-inner p {
     font-size: 18px;
 }
 
-.portfolio-box:hover .portfolio-box-caption-content {
+.trip-summary:hover .portfolio-box-caption-content {
     top: 65%;
 }
 

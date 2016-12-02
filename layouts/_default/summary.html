@@ -1,11 +1,11 @@
 <div class="col-lg-4 col-sm-6 gallery" itemscope="" itemtype="http://schema.org/ImageGallery"
      data-pswp-uid="{{ .Params.modalid }}">
-    <figure itemscope="" itemtype="http://schema.org/ImageObject" class="portfolio-box portfolio-link">
-        <a href="{{ $.Site.BaseURL }}{{ .Params.img.path }}" itemprop="contentUrl" data-size="650x350">
+    <div class="trip-summary">
+        <a href="{{ $.Site.BaseURL }}{{ .Params.img.path }}">
             <img src="{{ .Params.img.path }}" class="img-responsive" alt="">
         </a>
         {{ if and .Params.category .Title }}
-        <figcaption itemprop="caption description" class="portfolio-box-caption">
+        <div class="portfolio-box-caption">
             <div class="portfolio-box-caption-content">
                 {{ if .Title }}
                 <div class="project-name">
@@ -17,15 +17,14 @@
                     {{ len .Params.images }} images
                 </div>
             </div>
-        </figcaption>
+        </div>
         {{ end }}
-    </figure>
+    </div>
 
-    <!-- old modal content -->
-    <div class="gallery-parts" style="display: none;">
+    <div style="display: none;">
         {{ range .Params.images }}
 
-        <figure itemscope="" itemtype="http://schema.org/ImageObject">
+        <figure itemscope itemtype="http://schema.org/ImageObject">
             <a href="{{ $.Site.BaseURL }}{{ .path }}" itemprop="contentUrl" data-size="650x350">
                 <img src="{{ $.Site.BaseURL }}{{ .path }}" itemprop="thumbnail" alt="alt-text">
             </a>
@@ -33,6 +32,12 @@
                 {{ with .alt }} {{ . }} {{ end }}
                 {{ with .owner }}<span itemprop="copyrightHolder">{{ . }}</span>{{ end }}
             </figcaption>
+            {{ with .position }}
+            <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+                <meta itemprop="latitude" content="{{ .lat }}" />
+                <meta itemprop="longitude" content="{{ .lng }}" />
+            </div>
+            {{ end }}
         </figure>
         {{ end }}
     </div>
