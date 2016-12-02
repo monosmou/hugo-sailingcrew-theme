@@ -9,7 +9,7 @@
             <div class="portfolio-box-caption-content">
                 {{ if .Title }}
                 <div class="project-name">
-                    {{ with .Date }} <span class="date">{{ dateFormat "Monday" . }}:</span>{{ end }}
+                    {{ with .Params.kml.start }} <span class="date">{{ dateFormat "Monday" . }}:</span>{{ end }}
                     {{ .Title }}
                 </div>
                 {{ end }}

@@ -25,7 +25,7 @@
 {{ end }}
 
 {{ define "trips" }}
-    {{ range first 10 .Data.Pages }}
+    {{ range .Data.Pages.ByDate }}
     {{ .Render "summary" }}
     {{ end }}
 {{ end }}
