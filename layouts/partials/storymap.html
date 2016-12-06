@@ -52,7 +52,7 @@
 
 <section class="storymap no-padding" id="storymap">
     {{ range where .Site.Pages "Params.category" "Trip" }}
-    <a class="kml-track" href="https://minos-2016-w3.monosmou.com{{ .Params.kml.path }}">{{ .Params.title }} - {{ .Params.category }}</a>
+    <a class="kml-track" href="{{ .Params.kml.path }}">{{ .Params.title }} - {{ .Params.category }}</a>
     {{ end }}
 </section>
 {{ end }}
